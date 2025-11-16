@@ -1,1 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  /* Custom theme configuration can go here */
+}

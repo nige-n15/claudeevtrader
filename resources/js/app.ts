@@ -1,35 +1,27 @@
 import '../css/app.css';
+import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import type { DefineComponent } from 'vue';
-import { createApp, h } from 'vue';
-import { toast, Toaster } from 'vue-sonner';
-import { ZiggyVue } from 'ziggy-js';
+import { createApp, DefineComponent, h } from 'vue';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
-const appName = import.meta.env.VITE_APP_NAME || 'N1g3 EV Trader';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
+    title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
         resolvePageComponent(
-            `./pages/${name}.vue`,
-            import.meta.glob<DefineComponent>('./pages/**/*.vue'),
+            `./Pages/${name}.vue`,
+            import.meta.glob<DefineComponent>('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        const app = createApp({ render: () => h(App, props) })
+        createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue);
-
-        // Register Toaster globally
-        app.component('Toaster', Toaster);
-
-        // Make toast available globally
-        app.config.globalProperties.$toast = toast;
-
-        app.mount(el);
+            .use(ZiggyVue)
+            .mount(el);
     },
     progress: {
         color: '#4B5563',
     },
-}).then(() => console.info('N1g3 EV Trader initialized'));
+});
