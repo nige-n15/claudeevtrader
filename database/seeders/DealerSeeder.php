@@ -48,8 +48,7 @@ class DealerSeeder extends Seeder
             'name' => 'James Wilson',
             'email' => 'james@premiummotors.co.uk',
             'password' => Hash::make('password'),
-            'role' => 'dealer_owner',
-            'is_active' => true,
+            'role' => User::ROLE_DEALER,
         ]);
 
         // 2. Manchester Motor Group - All features enabled (modern approach)
@@ -92,8 +91,7 @@ class DealerSeeder extends Seeder
             'name' => 'Sarah Thompson',
             'email' => 'sarah@mmgcars.co.uk',
             'password' => Hash::make('password'),
-            'role' => 'dealer_owner',
-            'is_active' => true,
+            'role' => User::ROLE_DEALER,
         ]);
 
         User::create([
@@ -101,8 +99,7 @@ class DealerSeeder extends Seeder
             'name' => 'Mike Johnson',
             'email' => 'mike@mmgcars.co.uk',
             'password' => Hash::make('password'),
-            'role' => 'dealer_staff',
-            'is_active' => true,
+            'role' => User::ROLE_DEALER,
         ]);
 
         // 3. Edinburgh Elite Autos - Email & Test Drive focus
@@ -140,8 +137,7 @@ class DealerSeeder extends Seeder
             'name' => 'Andrew MacDonald',
             'email' => 'andrew@eliteautos.scot',
             'password' => Hash::make('password'),
-            'role' => 'dealer_owner',
-            'is_active' => true,
+            'role' => User::ROLE_DEALER,
         ]);
 
         // 4. Birmingham Budget Motors - Simple email only
@@ -178,18 +174,15 @@ class DealerSeeder extends Seeder
             'name' => 'David Patel',
             'email' => 'david@bbmotors.co.uk',
             'password' => Hash::make('password'),
-            'role' => 'dealer_owner',
-            'is_active' => true,
+            'role' => User::ROLE_DEALER,
         ]);
 
         // Platform Admin User (no dealer association)
         User::create([
-            'dealer_id' => null,
             'name' => 'Platform Admin',
             'email' => 'admin@n1g3evtrader.com',
             'password' => Hash::make('password'),
-            'role' => 'admin',
-            'is_active' => true,
+            'role' => User::ROLE_ADMIN,
         ]);
     }
 }
