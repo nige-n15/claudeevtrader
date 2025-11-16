@@ -32,7 +32,19 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user() ? [
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    'role' => $request->user()->role,
+                    'dealer_id' => $request->user()->dealer_id,
+                    'current_dealer_id' => $request->user()->current_dealer_id,
+                    'is_admin' => $request->user()->isAdmin(),
+                    'is_dealer' => $request->user()->isDealer(),
+                    'is_customer' => $request->user()->isCustomer(),
+                    'can_access_dealer_dashboard' => $request->user()->canAccessDealerDashboard(),
+                ] : null,
+                'active_dealer' => $request->user()?->active_dealer,
             ],
         ];
     }

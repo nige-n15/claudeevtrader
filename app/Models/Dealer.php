@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -68,6 +69,13 @@ class Dealer extends Model
     public function importJobs(): HasMany
     {
         return $this->hasMany(ImportJob::class);
+    }
+
+    public function customers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'customer_dealer')
+            ->where('role', User::ROLE_CUSTOMER)
+            ->withTimestamps();
     }
 
     // Buyer Journey Configuration Methods
