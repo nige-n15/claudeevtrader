@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dealer_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'dealer_owner', 'dealer_manager', 'dealer_staff'])->default('dealer_staff');
-            $table->boolean('is_active')->default(true);
+            $table->string('role')->default('customer'); // admin, dealer, customer
+            $table->foreignId('dealer_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('current_dealer_id')->nullable()->constrained('dealers')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
